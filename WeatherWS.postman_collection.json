@@ -1,0 +1,192 @@
+{
+	"info": {
+		"_postman_id": "1878a5c6-3013-47be-9f60-0208607490f5",
+		"name": "WeatherWS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getRegionProvince",
+			"item": [
+				{
+					"name": "获取省份ID",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": "http://ws.webxml.com.cn/WebServices/WeatherWS.asmx/getRegionProvince"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "getSupportCityString",
+			"item": [
+				{
+					"name": "获取城市ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "04ac540a-402f-41db-9e1f-72e3faad9477",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "theRegionCode",
+									"value": "3113",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://ws.webxml.com.cn/WebServices/WeatherWS.asmx/getSupportCityString"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "getRegionCountry",
+			"item": [
+				{
+					"name": "获取国家",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "db94410b-5498-4701-8c28-4b449f1a3adf",
+								"type": "text/javascript",
+								"exec": [
+									"",
+									"pm.test(\"响应状态码检查1\", function () {",
+									"    pm.response.to.have.status(200);",
+									"}); ",
+									"tests[\"响应状态码检查2\"]= responseCode.code === 200;",
+									"",
+									"pm.test(\"响应状态码内容2\", function () {",
+									"    pm.response.to.have.status(\"OK\");",
+									"});",
+									"tests[\"响应状态码内容2\"] = responseCode.name.has(\"OK\");",
+									"",
+									"pm.test(\"响应状态时间1\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});",
+									"tests[\"响应状态时间2\"] = responseTime < 200;",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"巴西\");",
+									"});",
+									"tests[\"Body matches string\"] = responseBody.has(\"巴西\")"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "7b5e17b2-e474-4408-a463-bb9fb7cf8c4c",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": "http://ws.webxml.com.cn/WebServices/WeatherWS.asmx/getRegionCountry"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "getRegionDataset",
+			"item": [
+				{
+					"name": "获取省份表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": "http://ws.webxml.com.cn/WebServices/WeatherWS.asmx/getRegionDataset"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "getSupportCityDataset",
+			"item": [
+				{
+					"name": "获取四川省城市表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://ws.webxml.com.cn/WebServices/WeatherWS.asmx/getSupportCityDataset?theRegionCode=31123",
+							"protocol": "http",
+							"host": [
+								"ws",
+								"webxml",
+								"com",
+								"cn"
+							],
+							"path": [
+								"",
+								"WebServices",
+								"WeatherWS.asmx",
+								"getSupportCityDataset"
+							],
+							"query": [
+								{
+									"key": "theRegionCode",
+									"value": "31123"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "getWeather",
+			"item": [
+				{
+					"name": "获取天气",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
